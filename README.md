@@ -141,13 +141,5 @@ workout-generator/
 
 ## Deployment
 
-This application can be deployed to any Node.js hosting service:
+Deployment link : [https://fit-mantraa.onrender.com/](https://fit-mantraa.onrender.com/)
 
-1. Render: https://render.com
-2. Railway: https://railway.app
-3. Heroku: https://heroku.com
-4. AWS, GCP, Azure, etc.
-
-## License
-
-This project is licensed under the ISC License.
