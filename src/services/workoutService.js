@@ -262,49 +262,61 @@ const generateCircuitSection = (primary, secondary, experience, equipment) => {
  * @returns {Array} Superset exercises
  */
 const generateSupersetSection = (primary, secondary, experience, equipment) => {
-    const exercises = exerciseData.getExercises({
-        type: 'main',
-        equipment
-    });
-    
-    const primaryExercises = exercises.filter(ex => 
-        exerciseData.muscleGroups[primary]?.includes(ex.muscle_group));
-    
-    const secondaryExercises = exercises.filter(ex => 
-        exerciseData.muscleGroups[secondary]?.includes(ex.muscle_group));
-    
-    // Check if we have enough exercises for a superset
-    if (primaryExercises.length === 0 || secondaryExercises.length === 0) {
-        return null;
-    }
-    
-    // Get random exercises from each group
-    const primaryExercise = primaryExercises[Math.floor(Math.random() * primaryExercises.length)];
-    const secondaryExercise = secondaryExercises[Math.floor(Math.random() * secondaryExercises.length)];
-    
-    // Check if we got valid exercises
-    if (!primaryExercise || !secondaryExercise) {
-        return null;
-    }
-    
+  const exercises = exerciseData.getExercises({
+    type: 'main',
+    equipment
+  });
+  
+  const primaryExercises = exercises.filter(ex => 
+    exerciseData.muscleGroups[primary]?.includes(ex.muscle_group));
+  
+  const secondaryExercises = exercises.filter(ex => 
+    exerciseData.muscleGroups[secondary]?.includes(ex.muscle_group));
+  
+  // Check if we have enough exercises to create a superset
+  if (primaryExercises.length === 0 || secondaryExercises.length === 0) {
     return [{
-        name: `${primary} + ${secondary} Superset`,
-        rounds: experience === 'beginner' ? 2 : 3,
-        exercises: [
-            {
-                name: primaryExercise.name,
-                sets: primaryExercise.sets || 3,
-                reps: primaryExercise.reps || 10,
-                rest: '60 seconds'
-            },
-            {
-                name: secondaryExercise.name,
-                sets: secondaryExercise.sets || 3,
-                reps: secondaryExercise.reps || 10,
-                rest: '60 seconds'
-            }
-        ]
+      name: `${primary} + ${secondary} Superset`,
+      rounds: experience === 'beginner' ? 2 : 3,
+      exercises: [
+        {
+          name: primaryExercises.length > 0 ? primaryExercises[0].name : `${primary} exercise`,
+          sets: 3,
+          reps: 12,
+          rest: '60 seconds'
+        },
+        {
+          name: secondaryExercises.length > 0 ? secondaryExercises[0].name : `${secondary} exercise`,
+          sets: 3,
+          reps: 12,
+          rest: '60 seconds'
+        }
+      ]
     }];
+  }
+  
+  // Select one exercise from each group
+  const primaryExercise = primaryExercises[Math.floor(Math.random() * primaryExercises.length)];
+  const secondaryExercise = secondaryExercises[Math.floor(Math.random() * secondaryExercises.length)];
+  
+  return [{
+    name: `${primary} + ${secondary} Superset`,
+    rounds: experience === 'beginner' ? 2 : 3,
+    exercises: [
+      {
+        name: primaryExercise.name,
+        sets: primaryExercise.sets || 3,
+        reps: primaryExercise.reps || 12,
+        rest: '60 seconds'
+      },
+      {
+        name: secondaryExercise.name,
+        sets: secondaryExercise.sets || 3,
+        reps: secondaryExercise.reps || 12,
+        rest: '60 seconds'
+      }
+    ]
+  }];
 };
 
 /**

@@ -247,7 +247,10 @@ const formatExperience = (experience) => {
 const formatWorkoutSplit = (split) => {
   const splits = {
     'fullbody': 'Full Body',
+    'full_body': 'Full Body',
     'upper_lower': 'Upper/Lower',
+    'push_pull_legs': 'Push/Pull/Legs',
+    'bro_split': 'Bro Split',
     'ppl': 'Push/Pull/Legs'
   };
   
@@ -261,11 +264,20 @@ const formatWorkoutSplit = (split) => {
  */
 const formatMuscleGroup = (muscleGroup) => {
   const groups = {
+    'chest': 'Chest',
+    'back': 'Back',
+    'legs': 'Legs',
+    'shoulders': 'Shoulders',
+    'arms': 'Arms',
+    'core': 'Core',
+    'cardio': 'Cardio',
+    'full_body': 'Full Body',
     'push': 'Push (Chest, Shoulders, Triceps)',
     'pull': 'Pull (Back, Biceps)',
-    'legs': 'Legs',
-    'core': 'Core',
-    'fullbody': 'Full Body'
+    'triceps': 'Triceps',
+    'biceps': 'Biceps',
+    'traps': 'Traps',
+    'forearms': 'Forearms'
   };
   
   return groups[muscleGroup] || muscleGroup;

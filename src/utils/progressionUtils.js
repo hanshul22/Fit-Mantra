@@ -9,22 +9,22 @@
  * @returns {string} Workout split type
  */
 const determineWorkoutSplit = (goal, experience) => {
-    if (experience === 'beginner') {
+  if (experience === 'beginner') {
         return 'full_body';
-    }
-
-    switch (goal) {
+  }
+  
+  switch (goal) {
         case 'strength':
-            return 'push_pull_legs';
-        case 'muscle_gain':
+            return 'ppl';
+    case 'muscle_gain':
             return experience === 'advanced' ? 'bro_split' : 'upper_lower';
         case 'weight_loss':
             return 'full_body';
-        case 'endurance':
+    case 'endurance':
             return 'full_body';
-        default:
+    default:
             return 'full_body';
-    }
+  }
 };
 
 /**
@@ -34,8 +34,8 @@ const determineWorkoutSplit = (goal, experience) => {
  * @returns {Object} Primary and secondary muscle groups
  */
 const determineMuscleGroupFocus = (split, sessionNumber) => {
-    switch (split) {
-        case 'push_pull_legs':
+  switch (split) {
+        case 'ppl':
             return getPushPullLegsFocus(sessionNumber);
         case 'upper_lower':
             return getUpperLowerFocus(sessionNumber);
@@ -141,7 +141,7 @@ const applyProgressiveOverload = (exercise, sessionNumber, experience) => {
 };
 
 module.exports = {
-    determineWorkoutSplit,
+  determineWorkoutSplit,
     determineMuscleGroupFocus,
     applyProgressiveOverload
 };
